@@ -1,0 +1,22 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: scc-tutorial-scc
+allowPrivilegedContainer: false
+runAsUser:
+  type: MustRunAsRange 
+  uidRangeMin: 1000
+  uidRangeMax: 2000
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: MustRunAs 
+  ranges:
+  - min: 5000
+    max: 6000
+supplementalGroups:
+  type: MustRunAs 
+  ranges:
+  - min: 5000
+    max: 6000
+

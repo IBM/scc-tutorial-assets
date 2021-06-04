@@ -1,0 +1,25 @@
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: scc-tutorial-deploy-default
+    spec:
+      selector:
+        matchLabels:
+          app: scc-tutorial-default
+      template:
+        metadata:
+          labels:
+            app: scc-tutorial-default
+        spec:
+          containers:
+          - image: ubi8/ubi-minimal
+            name: ubi-minimal
+            command: ['sh', '-c', 'echo "Hello from user $(id -u)" && sleep infinity']
+            volumeMounts:
+            - mountPath: /var/opt/app/data
+              name: data
+          serviceAccountName: default
+          volumes:
+          - emptyDir: {}
+            name: data
+
